@@ -1,0 +1,12 @@
+name: contributor-workflow
+on: [pull_request, push]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          S: ${{ secrets.FORK_CANARY }}
+        run: |
+          echo "EVIDENCE event=${{ github.event_name }} ref=${{ github.ref }}"
+          echo "EVIDENCE secret readable: ${S:+yes}"
+          echo "EVIDENCE secret length: ${#S}"
